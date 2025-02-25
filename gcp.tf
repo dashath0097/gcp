@@ -4,7 +4,7 @@ provider "google" {
 }
 
 resource "google_compute_instance" "vm_instance" {
-  name         = "my-gcp-vm"
+  name         = "dashath_vm"
   machine_type = "e2-medium"
   zone         = "us-central1-a"
 
