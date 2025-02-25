@@ -1,16 +1,16 @@
 provider "google" {
-  project     = var.project_id
-  region      = var.region
+  project = "checkin-436517"
+  region  = "us-central1"
 }
 
 resource "google_compute_instance" "vm_instance" {
   name         = "my-gcp-vm"
   machine_type = "e2-medium"
-  zone         = var.zone
+  zone         = "us-central1-a"
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-11"  # Change to your preferred OS image
+      image = "debian-cloud/debian-11"  # Change OS if needed
     }
   }
 
@@ -32,29 +32,10 @@ resource "google_compute_instance" "vm_instance" {
   tags = ["web", "http-server"]
 }
 
-variable "project_id" {
-  description = "GCP project ID"
-  type        = string
-}
-
-variable "region" {
-  description = "GCP region"
-  type        = string
-  default     = "us-central1"
-}
-
-variable "zone" {
-  description = "GCP zone"
-  type        = string
-  default     = "us-central1-a"
-}
-
 output "instance_name" {
-  description = "The name of the VM instance"
-  value       = google_compute_instance.vm_instance.name
+  value = google_compute_instance.vm_instance.name
 }
 
 output "public_ip" {
-  description = "The public IP address of the VM"
-  value       = google_compute_instance.vm_instance.network_interface[0].access_config[0].nat_ip
+  value = google_compute_instance.vm_instance.network_interface[0].access_config[0].nat_ip
 }
